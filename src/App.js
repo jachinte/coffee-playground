@@ -3,63 +3,94 @@ import Select from 'react-select'
 import MonacoEditor from 'react-monaco-editor';
 import './App.css';
 
-const compilers = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
+const examples = [
+  { value: './examples/GPLCARD.hlcl', label: 'GPLCARD.hlcl' },
+  { value: './examples/MCS.plc', label: 'MCS.plc' }
 ]
+
+const compilers = [
+  { value: 'Compiler 1', label: 'Compiler 1' },
+  { value: 'Compiler 2', label: 'Compiler 2' },
+  { value: 'Compiler 3', label: 'Compiler 3' }
+]
+
+const options = {
+  contextmenu: false,
+  fontSize: 15,
+  minimap: {
+    enabled: false
+  },
+  selectOnLineNumbers: true,
+};
+
+const styles = {
+  control: styles => ({
+    ...styles,
+    borderColor: 'transparent',
+    cursor: 'pointer',
+    ':active': {
+      borderColor: 'transparent',
+    },
+    ':hover': {
+      borderColor: 'transparent',
+    }
+  }),
+  option: styles => ({
+    ...styles,
+    color: 'black',
+  })
+};
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      code: '// type your code...',
+      code: '',
+      selectedCompiler: compilers[0],
+      selectedExample: examples[0],
     }
+    this.handleEditorChange = this.handleEditorChange.bind(this);
+    this.handleExampleChange = this.handleExampleChange.bind(this);
+    this.handleCompilerChange = this.handleCompilerChange.bind(this);
+  }
+  componentWillMount() {
+    this.loadExample();
+  }
+  loadExample() {
+    import(`${this.state.selectedExample.value}`)
+      .then(file => fetch(file))
+      .then(response => response.text())
+      .then(text => this.setState({ code: text }));
   }
   editorDidMount(editor, monaco) {
-    console.log('editorDidMount', editor);
     editor.focus();
   }
-  onChange(newValue, e) {
+  handleEditorChange(newValue, e) {
     console.log('onChange', newValue, e);
   }
+  handleExampleChange(selectedExample) {
+    this.setState({ selectedExample }, () => this.loadExample());
+  }
+  handleCompilerChange(selectedCompiler) {
+    this.setState({ selectedCompiler });
+  }
   render() {
-    const options = {
-      selectOnLineNumbers: true,
-      fontSize: 15
-    };
-    const selectStyles = {
-      control: styles => ({
-        ...styles,
-        borderColor: 'transparent',
-        cursor: 'pointer',
-        ':active': {
-          borderColor: 'transparent',
-        },
-        ':hover': {
-          borderColor: 'transparent',
-        }
-      }),
-      option: styles => ({
-        ...styles,
-        color: 'black',
-      })
-    };
     return (
       <div id="app">
         <header>
           <h1>Coffee Playground</h1>
-          <p>
-            Welcome to the Coffee playground.
-            In this website you can try several examples with different compilers or even download the generated sources.
-          </p>
-          <p>
-            To get started, please select a compiler first:&nbsp;&nbsp;
-            <Select
-              id="compilers"
-              options={compilers}
-              styles={selectStyles}/>
-          </p>
+          <Select
+            className="select"
+            options={examples}
+            onChange={this.handleExampleChange}
+            styles={styles}
+            value={this.state.selectedExample}/>
+          <Select
+            className="select"
+            options={compilers}
+            onChange={this.handleCompilerChange}
+            styles={styles}
+            value={this.state.selectedCompiler}/>
         </header>
         <main>
           <a className="run-btn" title="Run solver">
@@ -69,12 +100,12 @@ class App extends Component {
           </a>
           <section className="editor">
             <MonacoEditor
-              height="96%"
+              height="100%"
               language="javascript"
               theme="vs-dark"
               value={this.state.code}
               options={options}
-              onChange={this.onChange}
+              onChange={this.handleEditorChange}
               editorDidMount={this.editorDidMount}
             />
           </section>

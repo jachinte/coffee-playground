@@ -19,21 +19,37 @@ body,
 /* Header */
 
 #app>header {
+    align-items: center;
+    align-content: center;
     background: rgb(11, 25, 36);
+    border-bottom: 1px solid rgb(34, 47, 60);
     box-sizing: border-box;
     color: white;
-    height: 170px;
-    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    justify-content: space-between;
+    padding: 0 10px;
 }
 
 #app>header h1 {
+    display: inline-block;
+    flex-grow: 2;
     font-weight: 100;
-    margin: 0 0 20px 0;
+    line-height: 60px;
+    margin: 0;
+    padding: 0;
 }
 
-#app>header #compilers {
+#app>header .select {
     display: inline-block;
-    width: 250px;
+    margin-right: 10px;
+    width: 200px;
+    z-index: 3;
+}
+
+#app>header .select:last-child {
+    margin-right: 0;
 }
 
 
@@ -41,22 +57,35 @@ body,
 
 #app>footer {
     background: rgb(11, 25, 36);
+    box-sizing: border-box;
+    border-top: 1px solid rgb(34, 47, 60);
     height: 40px;
 }
 
 #app>footer nav {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.53px;
-    padding: 0 20px;
-    text-transform: uppercase;
+    align-items: center;
+    align-content: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+    font-weight: 400;
+    height: 100%;
+    justify-content: flex-end;
+    letter-spacing: 0.3px;
+    padding: 0 10px;
+    width: 100%;
 }
 
 #app>footer nav a {
-    color: rgb(85, 94, 102);
-    line-height: 45px;
+    color: rgb(125, 138, 148);
+    display: inline-block;
     margin-right: 20px;
     text-decoration: none;
+}
+
+#app>footer nav a:last-child {
+    margin-right: 0;
 }
 
 
@@ -66,7 +95,7 @@ body,
     align-items: flex-start;
     background: rgb(23, 43, 58);
     display: flex;
-    height: calc(100% - 210px);
+    height: calc(100% - 100px);
     justify-content: stretch;
     position: relative;
     width: 100%;
@@ -76,18 +105,19 @@ body,
     align-items: center;
     background: rgb(185, 191, 196);
     border: 6px solid rgb(11, 20, 28);
-    border-radius: 100%;
-    bottom: 60px;
+    border-top: none;
+    border-radius: 0 0 100% 100%;
     cursor: pointer;
     display: flex;
     height: 60px;
     justify-content: center;
-    left: 50%;
-    margin: 0 0 0 -30px;
-    position: fixed;
+    left: 60%;
+    margin: 0 0 0 -43px;
+    position: absolute;
+    top: 0;
     transition: background 200ms;
     width: 60px;
-    z-index: 1;
+    z-index: 2;
 }
 
 #app .run-btn:hover {
@@ -99,10 +129,11 @@ body,
 }
 
 #app .editor {
-    background: #1e1e1e;
+    background: rgb(15, 32, 45);
     height: 100%;
     overflow: hidden;
-    width: 50%;
+    width: 60%;
+    z-index: 1;
 }
 
 #app .output {
@@ -114,7 +145,7 @@ body,
     overflow: auto;
     padding: 20px 20px 20px 60px;
     position: relative;
-    width: 50%;
+    width: 40%;
 }
 
 #app .output .dummy {
@@ -122,4 +153,20 @@ body,
     text-align: center;
     top: 50%;
     width: 100%;
+}
+
+
+/* Monaco editor */
+
+#app .editor .monaco-editor>div,
+#app .editor .monaco-editor .margin {
+    box-sizing: border-box;
+    padding-top: 15px;
+}
+
+#app .monaco-editor,
+#app .monaco-editor .margin,
+#app .monaco-editor-background,
+#app .monaco-editor .inputarea.ime-input {
+    background: transparent;
 }
