@@ -1,0 +1,125 @@
+/* Global styles */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body,
+#root,
+#app {
+    font-family: 'Roboto';
+    font-weight: 300;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+/* Header */
+
+#app>header {
+    background: rgb(11, 25, 36);
+    box-sizing: border-box;
+    color: white;
+    height: 170px;
+    padding: 20px;
+}
+
+#app>header h1 {
+    font-weight: 100;
+    margin: 0 0 20px 0;
+}
+
+#app>header #compilers {
+    display: inline-block;
+    width: 250px;
+}
+
+
+/* Fotter */
+
+#app>footer {
+    background: rgb(11, 25, 36);
+    height: 40px;
+}
+
+#app>footer nav {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.53px;
+    padding: 0 20px;
+    text-transform: uppercase;
+}
+
+#app>footer nav a {
+    color: rgb(85, 94, 102);
+    line-height: 45px;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+
+/* Main content */
+
+#app main {
+    align-items: flex-start;
+    background: rgb(23, 43, 58);
+    display: flex;
+    height: calc(100% - 210px);
+    justify-content: stretch;
+    position: relative;
+    width: 100%;
+}
+
+#app .run-btn {
+    align-items: center;
+    background: rgb(185, 191, 196);
+    border: 6px solid rgb(11, 20, 28);
+    border-radius: 100%;
+    bottom: 60px;
+    cursor: pointer;
+    display: flex;
+    height: 60px;
+    justify-content: center;
+    left: 50%;
+    margin: 0 0 0 -30px;
+    position: fixed;
+    transition: background 200ms;
+    width: 60px;
+    z-index: 1;
+}
+
+#app .run-btn:hover {
+    background: rgb(201, 208, 213);
+}
+
+#app .run-btn:active {
+    background: rgb(166, 175, 182);
+}
+
+#app .editor {
+    background: #1e1e1e;
+    height: 100%;
+    overflow: hidden;
+    width: 50%;
+}
+
+#app .output {
+    box-sizing: border-box;
+    color: rgb(85, 94, 102);
+    font-family: "Source Code Pro", "Consolas", "Inconsolata", "Droid Sans Mono", "Monaco", monospace;
+    height: 100%;
+    letter-spacing: 0.6px;
+    overflow: auto;
+    padding: 20px 20px 20px 60px;
+    position: relative;
+    width: 50%;
+}
+
+#app .output .dummy {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 100%;
+}
