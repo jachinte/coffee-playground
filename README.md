@@ -2,6 +2,10 @@
 
 This is a playground to try the Coffee language with different compilers.
 
+### Screenshot
+
+![Coffee Playground](screenshots/playground.png "Coffee Playground")
+
 ### Running the playground locally
 
 To run and compile this project you need to install [NodeJS](https://nodejs.org) and [yarn](https://yarnpkg.com). You could also use `npm` instead of yarn, which comes with Node.
